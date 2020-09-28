@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="094027a3-6703-446d-b358-98e1218fad08" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/pkg.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/data/appdata.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/data/appdata_test.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/disrupt/.gitlab-ci.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/disrupt/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/disrupt/cmd/ctrlctest.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/disrupt/disrupt.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/disrupt/readme.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/disrupt/signalsigterm.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/example/getapp.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/slog/.gitlab-ci.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/slog/Entry/entry.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/slog/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/slog/consume/consume.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/slog/consume/doc.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/slog/logger.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/slog/logi/logger.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/slog/readme.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/slog/simple/log.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/slog/simple/log_test.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/util/app.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/util/helpers.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/util/sanitizers.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/coding/fek/fek.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/coding/fek/fek_test.go" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="GOROOT" path="C:\Users\loki\sdk\go1.14.9" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GoLibraries">
+    <option name="indexEntireGoPath" value="false" />
+  </component>
+  <component name="ProjectId" id="1i9FDS22yiKXD3FONZ9V6zXHKIv" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="autoscrollToSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="sortByType" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="full.screen.before.presentation.mode" value="false" />
+    <property name="go.import.settings.migrated" value="true" />
+    <property name="go.sdk.automatically.set" value="true" />
+    <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/coding" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\loki\GolandProjects\pkg\coding" />
+      <recent name="C:\Users\loki\GolandProjects\pkg" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\loki\GolandProjects\pkg" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="094027a3-6703-446d-b358-98e1218fad08" name="Default Changelist" comment="" />
+      <created>1601311780354</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1601311780354</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VgoProject">
+    <integration-enabled>true</integration-enabled>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="432" y="537" key="#Go_Modules" timestamp="1601312060247">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="432" y="537" key="#Go_Modules/0.0.2560.1400@0.0.2560.1400" timestamp="1601312060247" />
+    <state x="1086" y="417" key="#com.intellij.ide.util.MemberChooser" timestamp="1601313589681">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="1086" y="417" key="#com.intellij.ide.util.MemberChooser/0.0.2560.1400@0.0.2560.1400" timestamp="1601313589681" />
+    <state x="347" y="391" width="585" height="624" key="find.popup" timestamp="1601312250145">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="347" y="391" width="585" height="624" key="find.popup/0.0.2560.1400@0.0.2560.1400" timestamp="1601312250145" />
+  </component>
+</project>

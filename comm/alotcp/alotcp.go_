@@ -1,0 +1,326 @@
+// Package alotcp (Autoscaling Latency Optimizing Transmission Control
+// Protocol) implements a latency optimizing transmission control
+// protocol that uses Reed Solomon FEC to increase redundancy on noisy
+// lines both through packet size and ratio of message to redundancy
+// ratios by monitoring the effective throughput on a connection and
+// gently adjusting redundancy/packet size up and down to minimise
+// retransmissions.
+package alotcp
+
+import (
+	"crypto/cipher"
+	"crypto/rand"
+	"encoding/hex"
+	"errors"
+	"io"
+	"net"
+	"runtime/debug"
+	"strings"
+	"time"
+
+	"github.com/p9c/pkg/app/slog"
+
+	"github.com/p9c/pkg/coding/fec"
+)
+
+const (
+	success int = iota
+	closed
+	other
+)
+
+type (
+	MsgBuffer struct {
+		Buffers [][]byte
+		First   time.Time
+		Decoded bool
+		Source  net.Addr
+	}
+	// HandlerFunc is a function that is used to process a received message
+	HandlerFunc func(
+		ctx interface{}, src net.Addr, dst string, b []byte,
+	) (err error)
+	Handlers    map[string]HandlerFunc
+	Connection  struct {
+		MaxDatagramSize int
+		Ready           chan struct{}
+		Receiver        *net.UDPConn
+		Sender          *net.UDPConn
+		buffers         map[string]*MsgBuffer
+		context         interface{}
+		receiveCiph     cipher.AEAD
+		sendCiph        cipher.AEAD
+		currCiphTxCount int
+	}
+)
+
+// NewConnection sets up a listener and sender for a specified destination
+func NewConnection(
+	ctx interface{}, sender,
+	receiver string, maxDatagramSize int, handlers Handlers, quit chan struct{},
+) (
+	channel *Connection, err error,
+) {
+	channel = &Connection{
+		MaxDatagramSize: maxDatagramSize,
+		buffers:         make(map[string]*MsgBuffer),
+		context:         ctx,
+	}
+	var magics []string
+	for i := range handlers {
+		magics = append(magics, i)
+	}
+	// if channel.sendCiph, err = gcm.GetCipher(key); slog.Check(err) {
+	// }
+	// if channel.receiveCiph, err = gcm.GetCipher(key); slog.Check(err) {
+	// }
+	channel.Receiver, err = Listen(
+		receiver, channel, maxDatagramSize,
+		handlers, quit,
+	)
+	channel.Sender, err = NewSender(sender, maxDatagramSize)
+	if err != nil {
+		slog.Error(err)
+	}
+	slog.Warn("starting connection:", sender, receiver, magics)
+	return
+}
+
+// NewSender creates a new UDP connection to a specified address
+func NewSender(address string, maxDatagramSize int) (
+	conn *net.UDPConn, err error,
+) {
+	var addr *net.UDPAddr
+	if addr, err = net.ResolveUDPAddr(
+		"udp4", address,
+	); slog.Check(err) {
+		return
+	} else if conn, err = net.DialUDP(
+		"udp4", nil, addr,
+	); slog.Check(err) {
+		debug.PrintStack()
+		return
+	}
+	slog.Debug(
+		"started new sender on", conn.LocalAddr(), "->",
+		conn.RemoteAddr(),
+	)
+	if err = conn.SetWriteBuffer(maxDatagramSize); slog.Check(err) {
+	}
+	return
+}
+
+// Listen binds to the UDP Address and port given and writes packets received
+// from that Address to a buffer which is passed to a handler
+func Listen(
+	address string, channel *Connection, maxDatagramSize int,
+	handlers Handlers, quit chan struct{},
+) (conn *net.UDPConn, err error) {
+	var addr *net.UDPAddr
+	if addr, err = net.ResolveUDPAddr("udp4", address); slog.Check(err) {
+		return
+	} else if conn, err = net.ListenUDP("udp4", addr); slog.Check(err) {
+		return
+	} else if conn == nil {
+		return nil, errors.New("unable to start connection ")
+	}
+	slog.Debug(
+		"starting listener on", conn.LocalAddr(), "->", conn.RemoteAddr(),
+	)
+	if err = conn.SetReadBuffer(maxDatagramSize); slog.Check(err) {
+		// not a critical error but should not happen
+	}
+	go Handle(address, channel, handlers, maxDatagramSize, quit)
+	return
+}
+
+func handleNetworkError(address string, err error) (result int) {
+	if len(
+		strings.Split(err.Error(), "use of closed network connection"),
+	) >= 2 {
+		slog.Debug("connection closed", address)
+		result = closed
+	} else {
+		slog.Errorf("ReadFromUDP failed: '%s'", err)
+		result = other
+	}
+	return
+}
+
+// Handle listens for messages, decodes them, aggregates them, recovers the data
+// from the reed solomon fec shards received and invokes the handler provided
+// matching the magic on the complete received messages
+func Handle(
+	address string, channel *Connection,
+	handlers Handlers, maxDatagramSize int, quit chan struct{},
+) {
+	buffer := make([]byte, maxDatagramSize)
+	// Loop forever reading from the socket until it is closed
+	var err error
+	var numBytes int
+	var src net.Addr
+	<-channel.Ready
+out:
+	for {
+		select {
+		case <-quit:
+			break out
+		default:
+		}
+		if numBytes, src, err = channel.Receiver.ReadFromUDP(
+			buffer,
+		); slog.Check(err) {
+			switch handleNetworkError(address, err) {
+			case closed:
+				break out
+			case other:
+				continue
+			case success:
+			}
+		}
+		// Filter messages by magic, if there is no match in the map the packet is
+		// ignored
+		magic := string(buffer[:4])
+		if handler, ok := handlers[magic]; ok {
+			msg := buffer[:numBytes]
+			nL := channel.receiveCiph.NonceSize()
+			nonceBytes := msg[4 : 4+nL]
+			nonce := string(nonceBytes)
+			var shard []byte
+			if shard, err = channel.receiveCiph.Open(
+				nil, nonceBytes,
+				msg[4+len(nonceBytes):], nil,
+			); err != nil {
+				continue
+			}
+			if bn, ok := channel.buffers[nonce]; ok {
+				if !bn.Decoded {
+					bn.Buffers = append(bn.Buffers, shard)
+					if len(bn.Buffers) >= 3 {
+						// DEBUG(len(bn.Buffers))
+						// try to decode it
+						var cipherText []byte
+						cipherText, err = fec.Decode(bn.Buffers)
+						if err != nil {
+							slog.Error(err)
+							continue
+						}
+						bn.Decoded = true
+						// DEBUG(numBytes, src, err)
+						slog.Debugf(
+							"received packet with magic %s from %s",
+							magic, src.String(),
+						)
+						if err = handler(
+							channel.context, src, address, cipherText,
+						); slog.Check(err) {
+							continue
+						}
+					}
+				} else {
+					for i := range channel.buffers {
+						if i != nonce || (channel.buffers[i].Decoded &&
+							len(channel.buffers[i].Buffers) > 8) {
+							// superseded messages can be deleted from the
+							// buffers, we don't add more data for the already
+							// decoded.
+							delete(channel.buffers, i)
+						}
+					}
+				}
+			} else {
+				channel.buffers[nonce] = &MsgBuffer{
+					[][]byte{},
+					time.Now(), false, src,
+				}
+				channel.buffers[nonce].Buffers = append(
+					channel.buffers[nonce].
+						Buffers, shard,
+				)
+			}
+		}
+	}
+}
+
+// Close the channel
+func (c *Connection) Close() (err error) {
+	// if err = c.Sender.Close(); Check(err) {
+	// }
+	// if err = c.Receiver.Close(); Check(err) {
+	// }
+	return
+}
+
+// GetShards returns a buffer iterator to feed to Connection.SendMany containing
+// fec encoded shards built from the provided buffer
+func GetShards(data []byte) (shards [][]byte) {
+	var err error
+	if shards, err = fec.Encode(data); slog.Check(err) {
+	}
+	return
+}
+
+// Send fires off some data through the configured channel's outbound.
+func (c *Connection) Send(magic []byte, nonce []byte, data []byte) (
+	n int, err error,
+) {
+	if len(data) == 0 {
+		err = errors.New("not sending empty packet")
+		slog.Error(err)
+		return
+	}
+	var msg []byte
+	if msg, err = EncryptMessage(
+		c.sendCiph, magic, nonce, data,
+	); slog.Check(err) {
+	}
+	n, err = c.Sender.Write(msg)
+	// DEBUG(msg)
+	return
+}
+
+// SendMany sends a BufIter of shards as produced by GetShards
+func (c *Connection) SendMany(magic []byte, b [][]byte) (err error) {
+	if nonce, err := GetNonce(c.sendCiph); slog.Check(err) {
+	} else {
+		for i := 0; i < len(b); i++ {
+			// DEBUG(i)
+			if _, err = c.Send(magic, nonce, b[i]); slog.Check(err) {
+				// debug.PrintStack()
+			}
+		}
+		slog.Debug(
+			"sent packets", string(magic),
+			hex.EncodeToString(nonce), c.Sender.LocalAddr(),
+			c.Sender.RemoteAddr(),
+		)
+	}
+	return
+}
+
+func GetNonce(ciph cipher.AEAD) (nonce []byte, err error) {
+	// get a nonce for the packet, it is both message ID and salt
+	nonce = make([]byte, ciph.NonceSize())
+	if _, err = io.ReadFull(rand.Reader, nonce); slog.Check(err) {
+	}
+	return
+}
+
+// EncryptMessage encrypts a message, if the nonce is given it uses that otherwise it generates a new one.
+// If there is no cipher this just returns a message with the given magic prepended.
+func EncryptMessage(
+	ciph cipher.AEAD, magic []byte, nonce, data []byte,
+) (msg []byte, err error) {
+	if ciph != nil {
+		if nonce == nil {
+			nonce, err = GetNonce(ciph)
+		}
+		msg = append(
+			append(magic, nonce...), ciph.Seal(nil, nonce, data, nil), ...
+		)
+	} else {
+		msg = append(magic, data...)
+	}
+
+	return
+}
