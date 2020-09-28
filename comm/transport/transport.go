@@ -11,8 +11,7 @@ import (
 	"time"
 
 	"github.com/p9c/pkg/app/slog"
-
-	"github.com/p9c/pkg/coding/fec"
+	"github.com/p9c/pkg/coding/fek"
 )
 
 type HandleFunc map[string]func(ctx interface{}) func(b []byte) (err error)
@@ -103,7 +102,7 @@ func (c *Connection) CreateShards(b, magic []byte) (shards [][]byte,
 		return
 	}
 	// generate the shards
-	shards, err = fec.Encode(b)
+	shards, err = fek.Encode(b)
 	for i := range shards {
 		encryptedShard := c.ciph.Seal(nil, nonce, shards[i], nil)
 		shardLen := len(encryptedShard)
@@ -220,7 +219,7 @@ func (c *Connection) Listen(handlers HandleFunc, ifc interface{},
 						if len(bn.Buffers) >= 3 {
 							// try to decode it
 							var cipherText []byte
-							cipherText, err = fec.Decode(bn.Buffers)
+							cipherText, err = fek.Decode(bn.Buffers)
 							if err != nil {
 								slog.Error(err)
 								continue

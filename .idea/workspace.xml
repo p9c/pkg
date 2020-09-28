@@ -19,38 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="094027a3-6703-446d-b358-98e1218fad08" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/pkg.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/data/appdata.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/data/appdata_test.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/disrupt/.gitlab-ci.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/disrupt/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/disrupt/cmd/ctrlctest.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/disrupt/disrupt.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/disrupt/readme.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/disrupt/signalsigterm.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/example/getapp.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/slog/.gitlab-ci.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/slog/Entry/entry.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/slog/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/slog/consume/consume.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/slog/consume/doc.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/slog/logger.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/slog/logi/logger.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/slog/readme.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/slog/simple/log.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/slog/simple/log_test.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/util/app.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/util/helpers.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/util/sanitizers.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/coding/fek/fek.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/coding/fek/fek_test.go" afterDir="false" />
-    </list>
+    <list default="true" id="094027a3-6703-446d-b358-98e1218fad08" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
