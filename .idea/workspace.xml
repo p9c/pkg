@@ -19,7 +19,14 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="094027a3-6703-446d-b358-98e1218fad08" name="Default Changelist" comment="" />
+    <list default="true" id="094027a3-6703-446d-b358-98e1218fad08" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/slog/serve/doc.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/slog/serve/serve.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/slog/.gitlab-ci.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/slog/logi/logger.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/slog/logi/logger.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/slog/simple/log.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/slog/simple/log.go" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -52,20 +59,22 @@
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.sdk.automatically.set" value="true" />
     <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/coding" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/slog" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="orchideLicense" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\loki\GolandProjects\pkg\coding" />
+    <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\loki\GolandProjects\pkg" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\loki\GolandProjects\pkg\app\slog" />
+      <recent name="C:\Users\loki\GolandProjects\pkg\coding" />
       <recent name="C:\Users\loki\GolandProjects\pkg" />
     </key>
   </component>
@@ -93,6 +102,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
@@ -106,6 +116,10 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="1086" y="417" key="#com.intellij.ide.util.MemberChooser/0.0.2560.1400@0.0.2560.1400" timestamp="1601313589681" />
+    <state x="1421" y="0" key="SettingsEditor" timestamp="1601316035192">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="1421" y="0" key="SettingsEditor/0.0.2560.1400@0.0.2560.1400" timestamp="1601316035192" />
     <state x="347" y="391" width="585" height="624" key="find.popup" timestamp="1601312250145">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>

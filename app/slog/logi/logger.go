@@ -5,8 +5,7 @@ package logi
 type Level int
 type Printer func(lvl Level, txt interface{})
 
-// Logger is an interface that defines the set of operations relevant to a logger. This interface should be a stdlib
-// interface really because logging is so useful for debugging.
+// Logger is an interface that defines the set of operations relevant to a logger.
 type Logger interface {
 	// The following are printers that print at or below the given level from the constants above
 	Fatal(txt ...interface{})
@@ -26,7 +25,12 @@ type Logger interface {
 	Infos(txt interface{})
 	Debugs(txt interface{})
 	Traces(txt interface{})
-
+	Fatalc(fn func() string)
+	Errorc(fn func() string)
+	Warnc(fn func() string)
+	Infoc(fn func() string)
+	Debugc(fn func() string)
+	Tracec(fn func() string)
 	// Check prints at error level if the error was not nil and returns true
 	Check(err error) bool
 	// SetPrinter enables loading a printer function to enable networked, piped, etc outputs

@@ -118,6 +118,30 @@ func (s *Simple) Traces(txt interface{}) {
 	s.Trace(spew.Sdump(txt))
 }
 
+func (s *Simple) Fatalc(fn func() string) {
+	s.Fatal(fn())
+}
+
+func (s *Simple) Errorc(fn func() string) {
+	s.Error(fn())
+}
+
+func (s *Simple) Warnc(fn func() string) {
+	s.Warn(fn())
+}
+
+func (s *Simple) Infoc(fn func() string) {
+	s.Info(fn())
+}
+
+func (s *Simple) Debugc(fn func() string) {
+	s.Debug(fn())
+}
+
+func (s *Simple) Tracec(fn func() string) {
+	s.Trace(fn())
+}
+
 func (s *Simple) Check(err error) (errs bool) {
 	if err != nil {
 		s.Printer(logi.DEBUG, err)
