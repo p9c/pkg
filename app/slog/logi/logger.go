@@ -95,3 +95,4 @@ var (
 		Debug: 6,
 		Trace: 7,
 	}
+)
