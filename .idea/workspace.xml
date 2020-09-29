@@ -20,12 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="094027a3-6703-446d-b358-98e1218fad08" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/slog/serve/doc.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/slog/serve/serve.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/slog/.gitlab-ci.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/slog/Pkg/pkg.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/slog/Pkg/pkg.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/slog/logi/logger.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/slog/logi/logger.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/slog/simple/log.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/slog/simple/log.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,14 +66,32 @@
     <property name="settings.editor.selected.configurable" value="orchideLicense" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\loki\GolandProjects\pkg" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\loki\GolandProjects\pkg\app\slog" />
       <recent name="C:\Users\loki\GolandProjects\pkg\coding" />
       <recent name="C:\Users\loki\GolandProjects\pkg" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\loki\GolandProjects\pkg" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="TestPackage in github.com/p9c/pkg/app/slog/Pkg" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="pkg" />
+      <working_directory value="$PROJECT_DIR$/app/slog/Pkg" />
+      <framework value="gotest" />
+      <kind value="PACKAGE" />
+      <package value="github.com/p9c/pkg/app/slog/Pkg" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <pattern value="^\QTestPackage\E$" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Go Test.TestPackage in github.com/p9c/pkg/app/slog/Pkg" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">

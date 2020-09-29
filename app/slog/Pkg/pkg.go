@@ -28,8 +28,7 @@ func Get(pkgs Pk.Package) Container {
 	return Container{*c.CreateContainer(PackageMagic)}
 }
 
-// LoadContainer takes a message byte slice payload and loads it into a container
-// ready to be decoded
+// LoadContainer takes a message byte slice payload and loads it into a container ready to be decoded
 func LoadContainer(b []byte) (out *Container) {
 	out = &Container{simplebuffer.Container{Data: b}}
 	return

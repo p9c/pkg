@@ -52,3 +52,46 @@ const (
 var LevelCodes = []string{
 	"TRC", "DBG", "INF", "WRN", "ERR", "FTL",
 }
+
+const (
+	Off   = "off"
+	Fatal = "fatal"
+	Error = "error"
+	Warn  = "warn"
+	Info  = "info"
+	Check = "check"
+	Debug = "debug"
+	Trace = "trace"
+)
+
+var (
+	Levels = []string{
+		Off,
+		Fatal,
+		Error,
+		Check,
+		Warn,
+		Info,
+		Debug,
+		Trace,
+	}
+	Tags = map[string]string{
+		Off:   "",
+		Fatal: "FTL",
+		Error: "ERR",
+		Check: "CHK",
+		Warn:  "WRN",
+		Info:  "INF",
+		Debug: "DBG",
+		Trace: "TRC",
+	}
+	LevelsMap = map[string]int{
+		Off:   0,
+		Fatal: 1,
+		Error: 2,
+		Check: 3,
+		Warn:  4,
+		Info:  5,
+		Debug: 6,
+		Trace: 7,
+	}
